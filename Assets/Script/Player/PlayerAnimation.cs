@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAnimation : MonoBehaviour
 {
     private Animator animator;
+    private bool hasJumped;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +15,7 @@ public class PlayerAnimation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        animator.SetBool("isWalking",InputManager.instance.move != 0f);
+        animator.SetBool("isJumping", PlayerBehave.instance.rb.velocity.y != 0f);
     }
 }

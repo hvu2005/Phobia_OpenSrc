@@ -7,9 +7,10 @@ public class PlayerBehave : MonoBehaviour
 {
     public static PlayerBehave instance;
 
-    private Rigidbody2D rb;
+    public Rigidbody2D rb { get; private set; }
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce;
+    private bool isFacingRight = true;
     //~~~~~~~~~~~~~~~~~~~~GroundCheck~~~~~~~~~~~~~~~~~~~~
     [SerializeField] private Vector2 groundCheckOffset;
     [SerializeField] private LayerMask whatIsGround;
@@ -37,6 +38,17 @@ public class PlayerBehave : MonoBehaviour
         Moving();
         Jumping();
         GroundCheck();
+        Flip();
+    }
+    private void Flip()
+    {
+        if (InputManager.instance.move > 0f && !isFacingRight || InputManager.instance.move < 0f && isFacingRight)
+        {
+            isFacingRight = !isFacingRight;
+            Vector3 localScaleX = transform.localScale;
+            localScaleX.x *= -1;
+            transform.localScale = localScaleX; 
+        }
     }
     private void Moving()
     {
