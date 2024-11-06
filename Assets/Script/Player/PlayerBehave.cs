@@ -15,7 +15,7 @@ public class PlayerBehave : MonoBehaviour
     [SerializeField] private Vector2 groundCheckOffset;
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private float checkGroundRange;
-    private bool isGrounded;
+    public bool isGrounded { get; private set; }
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     private bool isSlashing;
     // Start is called before the first frame update

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ed427c2f0e3d40e4ea04b156fb7cba29
+guid: 4293f3735d8f93846a5470b57b42b8b9
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638665362227558612
+  platformSettingsDirtyTick: 638665384825622160
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: jump_player_Frame_0
+  - name: landing_player_Frame_0
     originalName: 
     pivot: {x: 0.62499994, y: -2.2857144}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 28
+      x: 27
       y: 33
       width: 16
       height: 14
-    spriteID: c54dfcae04a84bb4ca4675805a2a5918
+    spriteID: acae238533cf1d64dbed7b1c35cc50d8
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -140,19 +140,19 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 28, y: 33}
-  - name: jump_player_Frame_1
+    uvTransform: {x: 27, y: 33}
+  - name: landing_player_Frame_1
     originalName: 
-    pivot: {x: 0.62499994, y: -1.7777779}
+    pivot: {x: 0.6, y: -1.7777779}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 33
-      width: 16
+      width: 15
       height: 18
-    spriteID: cdef6e8aa5e6dcd4e8066dc187ebe4e3
+    spriteID: 0c39c387c0ec6d34eb1fd863eb0ce7b6
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -161,18 +161,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 33}
-  - name: jump_player_Frame_2
+  - name: landing_player_Frame_2
     originalName: 
-    pivot: {x: 0.62499994, y: -1.5238097}
+    pivot: {x: 0.6, y: -1.5238097}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 16
+      width: 15
       height: 21
-    spriteID: f9e1a87430edf19478d6c66ba8df4bec
+    spriteID: 1caa3cd1522ea3e418fb2bd70e978101
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -181,18 +181,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: jump_player_Frame_3
+  - name: landing_player_Frame_3
     originalName: 
-    pivot: {x: 0.62499994, y: -1.6000001}
+    pivot: {x: 0.6, y: -1.6000001}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 28
+      x: 27
       y: 4
-      width: 16
+      width: 15
       height: 20
-    spriteID: 93dda7d9bbde7dd459505a6735b9a415
+    spriteID: fd6d977154227244cb9c26eacf80fc45
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -200,17 +200,17 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 28, y: 4}
+    uvTransform: {x: 27, y: 4}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 839141030
-    name: jump_player
+    guid: -118557777
+    name: landing_player
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: jump_player_Frame_0
+    - name: landing_player_Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
@@ -218,34 +218,34 @@ ScriptedImporter:
         y: 32
         width: 16
         height: 14
-      spriteId: c54dfcae04a84bb4ca4675805a2a5918
-    - name: jump_player_Frame_1
+      spriteId: acae238533cf1d64dbed7b1c35cc50d8
+    - name: landing_player_Frame_1
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
-        x: 38
+        x: 39
         y: 32
-        width: 16
+        width: 15
         height: 18
-      spriteId: cdef6e8aa5e6dcd4e8066dc187ebe4e3
-    - name: jump_player_Frame_2
+      spriteId: 0c39c387c0ec6d34eb1fd863eb0ce7b6
+    - name: landing_player_Frame_2
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:
-        x: 38
+        x: 39
         y: 32
-        width: 16
+        width: 15
         height: 21
-      spriteId: f9e1a87430edf19478d6c66ba8df4bec
-    - name: jump_player_Frame_3
+      spriteId: 1caa3cd1522ea3e418fb2bd70e978101
+    - name: landing_player_Frame_3
       frameIndex: 3
       additiveSortOrder: 0
       cellRect:
-        x: 38
+        x: 39
         y: 32
-        width: 16
+        width: 15
         height: 20
-      spriteId: 93dda7d9bbde7dd459505a6735b9a415
+      spriteId: fd6d977154227244cb9c26eacf80fc45
     linkedCells: []
     parentIndex: -1
   platformSettings:

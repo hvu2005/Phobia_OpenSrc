@@ -5,7 +5,8 @@ using UnityEngine;
 public class PlayerAnimation : MonoBehaviour
 {
     private Animator animator;
-    private bool hasJumped;
+    [SerializeField] private GameObject jumpSmoke;
+    private bool wasFalling;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +17,23 @@ public class PlayerAnimation : MonoBehaviour
     void Update()
     {
         animator.SetBool("isWalking",InputManager.instance.move != 0f);
-        animator.SetBool("isJumping", PlayerBehave.instance.rb.velocity.y != 0f);
+        animator.SetBool("isJumping", PlayerBehave.instance.rb.velocity.y > 0f);
+        animator.SetBool("isFalling", PlayerBehave.instance.rb.velocity.y < 0f);
+        if(animator.GetBool("isFalling"))
+        {
+            wasFalling = true;
+        }
+        if(PlayerBehave.instance.isGrounded && wasFalling)
+        {
+            StartCoroutine(JumpSmoke());
+            wasFalling = false;
+        }
+    }
+    private IEnumerator JumpSmoke()
+    {
+        jumpSmoke.SetActive(true);
+        jumpSmoke.transform.position = transform.position + new Vector3(0f,1.92f,0f);
+        yield return new WaitForSeconds(0.5f);
+        jumpSmoke.SetActive(false);
     }
 }

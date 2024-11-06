@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ed427c2f0e3d40e4ea04b156fb7cba29
+guid: 0ac4b360427d62c418c6e802579aa1ba
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638665362227558612
+  platformSettingsDirtyTick: 638665398146990940
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: jump_player_Frame_0
+  - name: jumpSmoke_Frame_0
     originalName: 
-    pivot: {x: 0.62499994, y: -2.2857144}
+    pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 28
-      y: 33
-      width: 16
-      height: 14
-    spriteID: c54dfcae04a84bb4ca4675805a2a5918
+      x: 52
+      y: 16
+      width: 8
+      height: 2
+    spriteID: f0489aaac64ee3244b9a4640268989d0
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -140,19 +140,19 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 28, y: 33}
-  - name: jump_player_Frame_1
+    uvTransform: {x: 52, y: 16}
+  - name: jumpSmoke_Frame_1
     originalName: 
-    pivot: {x: 0.62499994, y: -1.7777779}
+    pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 4
-      y: 33
-      width: 16
-      height: 18
-    spriteID: cdef6e8aa5e6dcd4e8066dc187ebe4e3
+      x: 30
+      y: 16
+      width: 14
+      height: 4
+    spriteID: 7c7b45cc18040d04880ec3d8b7795790
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -160,19 +160,19 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 4, y: 33}
-  - name: jump_player_Frame_2
+    uvTransform: {x: 30, y: 16}
+  - name: jumpSmoke_Frame_2
     originalName: 
-    pivot: {x: 0.62499994, y: -1.5238097}
+    pivot: {x: 0.5, y: -0.25}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 16
-      height: 21
-    spriteID: f9e1a87430edf19478d6c66ba8df4bec
+      width: 18
+      height: 4
+    spriteID: 00566f1948b1763498f3faf61d77ce9a
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -181,18 +181,18 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: jump_player_Frame_3
+  - name: jumpSmoke_Frame_3
     originalName: 
-    pivot: {x: 0.62499994, y: -1.6000001}
+    pivot: {x: 0.5, y: -0.5}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
-      x: 28
+      x: 30
       y: 4
-      width: 16
-      height: 20
-    spriteID: 93dda7d9bbde7dd459505a6735b9a415
+      width: 18
+      height: 4
+    spriteID: 07bab31bcec2e4a429e3b6487b39d749
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -200,52 +200,110 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 28, y: 4}
+    uvTransform: {x: 30, y: 4}
+  - name: jumpSmoke_Frame_4
+    originalName: 
+    pivot: {x: 0.5, y: -0.5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 16
+      width: 18
+      height: 4
+    spriteID: 03507e0985988f348be907486ac31e49
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 16}
+  - name: jumpSmoke_Frame_5
+    originalName: 
+    pivot: {x: 0.5, y: -5}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 28
+      width: 16
+      height: 1
+    spriteID: 1ee6c80965cf2254ab7d7145000415fd
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 28}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 839141030
-    name: jump_player
+    guid: 1813108165
+    name: jumpSmoke
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: jump_player_Frame_0
+    - name: jumpSmoke_Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 38
-        y: 32
-        width: 16
-        height: 14
-      spriteId: c54dfcae04a84bb4ca4675805a2a5918
-    - name: jump_player_Frame_1
+        x: 12
+        y: 0
+        width: 8
+        height: 2
+      spriteId: f0489aaac64ee3244b9a4640268989d0
+    - name: jumpSmoke_Frame_1
       frameIndex: 1
       additiveSortOrder: 0
       cellRect:
-        x: 38
-        y: 32
-        width: 16
-        height: 18
-      spriteId: cdef6e8aa5e6dcd4e8066dc187ebe4e3
-    - name: jump_player_Frame_2
+        x: 9
+        y: 0
+        width: 14
+        height: 4
+      spriteId: 7c7b45cc18040d04880ec3d8b7795790
+    - name: jumpSmoke_Frame_2
       frameIndex: 2
       additiveSortOrder: 0
       cellRect:
-        x: 38
-        y: 32
-        width: 16
-        height: 21
-      spriteId: f9e1a87430edf19478d6c66ba8df4bec
-    - name: jump_player_Frame_3
+        x: 7
+        y: 1
+        width: 18
+        height: 4
+      spriteId: 00566f1948b1763498f3faf61d77ce9a
+    - name: jumpSmoke_Frame_3
       frameIndex: 3
       additiveSortOrder: 0
       cellRect:
-        x: 38
-        y: 32
+        x: 7
+        y: 2
+        width: 18
+        height: 4
+      spriteId: 07bab31bcec2e4a429e3b6487b39d749
+    - name: jumpSmoke_Frame_4
+      frameIndex: 4
+      additiveSortOrder: 0
+      cellRect:
+        x: 7
+        y: 2
+        width: 18
+        height: 4
+      spriteId: 03507e0985988f348be907486ac31e49
+    - name: jumpSmoke_Frame_5
+      frameIndex: 5
+      additiveSortOrder: 0
+      cellRect:
+        x: 8
+        y: 5
         width: 16
-        height: 20
-      spriteId: 93dda7d9bbde7dd459505a6735b9a415
+        height: 1
+      spriteId: 1ee6c80965cf2254ab7d7145000415fd
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -288,4 +346,4 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 96, y: 96}
+  canvasSize: {x: 32, y: 32}
