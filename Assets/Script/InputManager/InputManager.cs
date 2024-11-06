@@ -11,6 +11,7 @@ public class InputManager : MonoBehaviour
     public float look { get; private set; }
     public bool isJumping {  get; private set; }
 
+    public bool isSlashing { get; private set; }
     // Start is called before the first frame update
     void Start()
     {
@@ -30,15 +31,20 @@ public class InputManager : MonoBehaviour
     {
         Moving();
         Jumping();
+        Slashing();
     }
     private void Moving()
     {
-        move = Input.GetAxisRaw(_inputData.move);
+        move = Input.GetAxis(_inputData.move);
         look = Input.GetAxisRaw(_inputData.look);
         
     }
     private void Jumping()
     {
-        isJumping = Input.GetKeyDown(_inputData.jump);
+        isJumping = Input.GetKey(_inputData.jump);
+    }
+    private void Slashing()
+    {
+        isSlashing = Input.GetKey(_inputData.slash);
     }
 }

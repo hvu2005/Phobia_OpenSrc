@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [SerializeField] private GameManagerData _data;
-
+    private GameObject canvas;
     private GameObject startCrossFade;
     private GameObject endCrossFade;
     //~~~~~~~~~~~~~SceneManage~~~~~~~~~~~~~~~~~~
@@ -20,11 +20,13 @@ public class GameManager : MonoBehaviour
     // Instantiate ScriptableObject Data
     private void InstantiateData()
     {
-        startCrossFade = Instantiate(_data.StartCrossFade);
-        endCrossFade = Instantiate(_data.EndCrossFade);
+        canvas = Instantiate(_data.canvas);
+        startCrossFade = Instantiate(_data.startCrossFade,canvas.transform);
+        endCrossFade = Instantiate(_data.endCrossFade,canvas.transform);
 
-        DontDestroyOnLoad(_data.StartCrossFade);
-        DontDestroyOnLoad(_data.EndCrossFade);
+        DontDestroyOnLoad(canvas);
+        //DontDestroyOnLoad(startCrossFade);
+        //DontDestroyOnLoad(endCrossFade);
     }
     // Start is called before the first frame update
     void Start()
