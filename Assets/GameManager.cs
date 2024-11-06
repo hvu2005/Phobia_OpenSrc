@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     private GameObject endCrossFade;
     //~~~~~~~~~~~~~SceneManage~~~~~~~~~~~~~~~~~~
     private string[] sceneName;
-    private int sceneIndex; 
+    private int sceneIndex = 0; 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     private GameState currentState;
 
@@ -50,6 +50,11 @@ public class GameManager : MonoBehaviour
         {
             SceneManager.LoadScene("Map1");
         }
+    }
+    public void loadSence()
+    {
+        sceneIndex++;
+        SceneManager.LoadScene(sceneName[sceneIndex]);
     }
     public void StartCrossFade(bool active)
     {
