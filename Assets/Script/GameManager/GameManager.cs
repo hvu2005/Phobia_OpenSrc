@@ -22,7 +22,6 @@ public class GameManager : MonoBehaviour
     {
         startCrossFade = Instantiate(_data.StartCrossFade);
         endCrossFade = Instantiate(_data.EndCrossFade);
-        sceneName = _data.sceneName;
 
         DontDestroyOnLoad(_data.StartCrossFade);
         DontDestroyOnLoad(_data.EndCrossFade);
@@ -30,7 +29,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        currentState = GameState.Playing;
         if(instance == null)
         {
             instance = this;
@@ -46,15 +45,20 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        switch(currentState)
         {
-            SceneManager.LoadScene("Map1");
+            case GameState.Playing:
+                break;
+            case GameState.Paused:
+                break;
+            case GameState.MainMenu:
+                break;
         }
     }
-    public void loadSence()
+    public void LoadSence()
     {
         sceneIndex++;
-        SceneManager.LoadScene(sceneName[sceneIndex]);
+        SceneManager.LoadScene(_data.sceneName[sceneIndex]);
     }
     public void StartCrossFade(bool active)
     {
