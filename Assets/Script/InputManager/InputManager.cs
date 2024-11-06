@@ -9,7 +9,7 @@ public class InputManager : MonoBehaviour
     [SerializeField] private InputData _inputData;
     public float move { get; private set; }
     public float look { get; private set; }
-
+    public bool isJumping {  get; private set; }
 
     // Start is called before the first frame update
     void Start()
@@ -29,11 +29,16 @@ public class InputManager : MonoBehaviour
     void Update()
     {
         Moving();
+        Jumping();
     }
     private void Moving()
     {
         move = Input.GetAxisRaw(_inputData.move);
         look = Input.GetAxisRaw(_inputData.look);
+        
     }
-
+    private void Jumping()
+    {
+        isJumping = Input.GetKeyDown(_inputData.jump);
+    }
 }
