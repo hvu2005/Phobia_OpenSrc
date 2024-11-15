@@ -6,12 +6,12 @@ public class InputManager : MonoBehaviour
 {
     public static InputManager instance;
 
-    [SerializeField] private InputData _inputData;
+    [SerializeField] private InputData _data;
     public float move { get; private set; }
     public float look { get; private set; }
-    public bool isJumping {  get; private set; }
-
+    public bool isJumping { get; private set; }
     public bool isSlashing { get; private set; }
+    public bool isGetAnyKeyDown {  get; private set; } 
     // Start is called before the first frame update
     void Start()
     {
@@ -32,19 +32,19 @@ public class InputManager : MonoBehaviour
         Moving();
         Jumping();
         Slashing();
+        isGetAnyKeyDown = Input.anyKeyDown;
     }
     private void Moving()
     {
-        move = Input.GetAxis(_inputData.move);
-        look = Input.GetAxisRaw(_inputData.look);
-        
+        move = Input.GetAxis(_data.move);
+        look = Input.GetAxisRaw(_data.look);
     }
     private void Jumping()
     {
-        isJumping = Input.GetKey(_inputData.jump);
+        isJumping = Input.GetKey(_data.jump);
     }
     private void Slashing()
     {
-        isSlashing = Input.GetKey(_inputData.slash);
+        isSlashing = Input.GetKey(_data.slash);
     }
 }

@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-
     [SerializeField] private GameManagerData _data;
-    private GameObject canvas;
+
+    public GameObject canvas;
     private GameObject startCrossFade;
     private GameObject endCrossFade;
     //~~~~~~~~~~~~~SceneManage~~~~~~~~~~~~~~~~~~
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour
     // Instantiate ScriptableObject Data
     private void InstantiateData()
     {
+        sceneIndex = PlayerPrefs.GetInt("SceneIndex");
         canvas = Instantiate(_data.canvas);
         startCrossFade = Instantiate(_data.startCrossFade,canvas.transform);
         endCrossFade = Instantiate(_data.endCrossFade,canvas.transform);
@@ -29,7 +31,7 @@ public class GameManager : MonoBehaviour
         //DontDestroyOnLoad(endCrossFade);
     }
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         currentState = GameState.Playing;
         if(instance == null)
@@ -60,6 +62,7 @@ public class GameManager : MonoBehaviour
     public void LoadSence()
     {
         sceneIndex++;
+        PlayerPrefs.SetInt("SceneIndex", sceneIndex);
         SceneManager.LoadScene(_data.sceneName[sceneIndex]);
     }
     public void StartCrossFade(bool active)
