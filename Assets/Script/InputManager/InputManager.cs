@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
     public static InputManager instance;
 
     [SerializeField] private InputData _data;
+    public bool canGetAction { get; set; } = true;
     public float move { get; private set; }
     public float look { get; private set; }
     public bool isJumping { get; private set; }
@@ -29,10 +30,11 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        isGetAnyKeyDown = Input.anyKeyDown;
+        if (!canGetAction) return;
         Moving();
         Jumping();
         Slashing();
-        isGetAnyKeyDown = Input.anyKeyDown;
     }
     private void Moving()
     {

@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "InputData", menuName = "Input System/InputData")]
+[CreateAssetMenu(fileName = "InputData", menuName = "ScriptableObjects/Input System")]
 public class InputData : ScriptableObject
 {
     public KeyCode interact = KeyCode.E;

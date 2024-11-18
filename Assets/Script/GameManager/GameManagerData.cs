@@ -1,7 +1,7 @@
 
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "GameManagerData", menuName = "ScriptableObjects/GameManagerData", order = 1)]
+[CreateAssetMenu(fileName = "GameManagerData", menuName = "ScriptableObjects/GameManager Data", order = 1)]
 public class GameManagerData : ScriptableObject
 {
     public GameObject canvas;

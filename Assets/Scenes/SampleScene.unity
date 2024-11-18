@@ -431,7 +431,7 @@ Transform:
   m_GameObject: {fileID: 1599727545}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.08, y: -4.3, z: -7.315052}
+  m_LocalPosition: {x: 4.08, y: -4.24, z: -7.315052}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -522,7 +522,7 @@ GameObject:
   - component: {fileID: 1713542146}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -794,7 +794,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _data: {fileID: 11400000, guid: b53fc6805188bcb4583c1ea7ae422523, type: 2}
   dialogue:
-  - aaaaaaaaa
+  - aaaaaaaaa beo i a ca s fdkd asdjaskfj dkgfjsfdsk wjeiajrakjfa dfkajdfkj
   - bbbbbbbbbbb
   - cccccccccccccc
 --- !u!1 &1921821572

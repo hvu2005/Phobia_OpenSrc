@@ -5,11 +5,10 @@ using UnityEngine;
 
 public class PlayerBehave : MonoBehaviour
 {
-    public static PlayerBehave instance;
-
     public Rigidbody2D rb { get; private set; }
     [SerializeField] private float moveSpeed;
     [SerializeField] private float jumpForce;
+    public bool canMove { get; set; } = true;
     private bool isFacingRight = true;
     //~~~~~~~~~~~~~~~~~~~~GroundCheck~~~~~~~~~~~~~~~~~~~~
     [SerializeField] private Vector2 groundCheckOffset;
@@ -21,20 +20,16 @@ public class PlayerBehave : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
         rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(!canMove)
+        {
+            return;
+        }
         Moving();
         Jumping();
         GroundCheck();

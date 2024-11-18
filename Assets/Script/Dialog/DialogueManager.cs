@@ -48,6 +48,8 @@ public class DialogueManager : MonoBehaviour
     }
     public void OpenDialogue(string[] conversation)
     {
+        //PlayerBehave.instance.canMove = false;
+        InputManager.instance.canGetAction = false;
         foreach(string dialogue in conversation)
         {
             paragraphs.Enqueue(dialogue);
@@ -77,6 +79,8 @@ public class DialogueManager : MonoBehaviour
         {
             dialogText.GetComponent<Text>().text = "";
             dialogPanel.SetActive(false);
+            //PlayerBehave.instance.canMove = true;
+            InputManager.instance.canGetAction = true;
         }
     }
 }
