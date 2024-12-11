@@ -26,7 +26,7 @@ public class PlayerBehave : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!canMove)
+        if(!canMove || !InputManager.instance.canGetAction)
         {
             return;
         }

@@ -25,7 +25,7 @@ public class DialogueManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
@@ -41,16 +41,16 @@ public class DialogueManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(InputManager.instance.isGetAnyKeyDown && !isTyping)
+        if (InputManager.instance.isGetAnyKeyDown && !isTyping)
         {
             NextLine();
         }
     }
-    public void OpenDialogue(string[] conversation)
+    private void OpenDialogue(string[] conversation)
     {
         //PlayerBehave.instance.canMove = false;
         InputManager.instance.canGetAction = false;
-        foreach(string dialogue in conversation)
+        foreach (string dialogue in conversation)
         {
             paragraphs.Enqueue(dialogue);
         }
@@ -61,16 +61,16 @@ public class DialogueManager : MonoBehaviour
     {
         isTyping = true;
         yield return new WaitForSeconds(0.75f);
-        foreach(char c in s)
+        foreach (char c in s)
         {
             dialogText.GetComponent<Text>().text += c;
             yield return new WaitForSeconds(0.01f);
         }
-        isTyping=false;
+        isTyping = false;
     }
     private void NextLine()
     {
-        if(paragraphs.Count > 0)
+        if (paragraphs.Count > 0)
         {
             dialogText.GetComponent<Text>().text = "";
             StartCoroutine(Typing(paragraphs.Dequeue()));
@@ -82,5 +82,10 @@ public class DialogueManager : MonoBehaviour
             //PlayerBehave.instance.canMove = true;
             InputManager.instance.canGetAction = true;
         }
+    }
+
+    public void SetUpConversation(string[] converstation)
+    {
+        OpenDialogue(converstation);
     }
 }
