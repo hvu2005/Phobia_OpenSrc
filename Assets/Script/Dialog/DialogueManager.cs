@@ -5,23 +5,14 @@ using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager instance;
-    [SerializeField] private DialogueData _data;
 
-    private Text dialogText;
-    private GameObject dialogPanel;
-    //private GameObject avatar;
+    [SerializeField] private Text dialogText;
+    [SerializeField] private GameObject dialogPanel;
     [SerializeField] private string[] dialogue;
     private Queue<string> paragraphs = new Queue<string>();
     private bool isTyping;
 
-    private void InstantiateData()
-    {
-        dialogPanel = Instantiate(_data.dialogPanel, GameManager.instance.canvas.transform);
-        dialogText = Instantiate(_data.dialogText.GetComponent<Text>(), dialogPanel.transform);
-        dialogText.GetComponent<Text>().text = "";
-        //avatar = Instantiate(avatar, dialogPanel.transform);
-        dialogPanel.SetActive(false);
-    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +25,6 @@ public class DialogueManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        InstantiateData();
         OpenDialogue(dialogue);
     }
 

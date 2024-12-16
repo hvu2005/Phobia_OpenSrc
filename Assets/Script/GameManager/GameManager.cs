@@ -7,29 +7,16 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    [SerializeField] private GameManagerData _data;
-
-    public GameObject canvas;
-    private GameObject startCrossFade;
-    private GameObject endCrossFade;
+    [SerializeField] private GameObject startCrossFade;
+    [SerializeField] private GameObject endCrossFade;
     //~~~~~~~~~~~~~SceneManage~~~~~~~~~~~~~~~~~~
-    private string[] sceneName;
+    [SerializeField] private string[] sceneName;
     private int sceneIndex = 0; 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     private GameState currentState;
 
     // Instantiate ScriptableObject Data
-    private void InstantiateData()
-    {
-        sceneIndex = PlayerPrefs.GetInt("SceneIndex");
-        canvas = Instantiate(_data.canvas);
-        startCrossFade = Instantiate(_data.startCrossFade,canvas.transform);
-        endCrossFade = Instantiate(_data.endCrossFade,canvas.transform);
 
-        DontDestroyOnLoad(canvas);
-        //DontDestroyOnLoad(startCrossFade);
-        //DontDestroyOnLoad(endCrossFade);
-    }
     // Start is called before the first frame update
     void Awake()
     {
@@ -38,7 +25,6 @@ public class GameManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-            InstantiateData();
         }
         else
         {
@@ -63,7 +49,7 @@ public class GameManager : MonoBehaviour
     {
         sceneIndex++;
         PlayerPrefs.SetInt("SceneIndex", sceneIndex);
-        SceneManager.LoadScene(_data.sceneName[sceneIndex]);
+        SceneManager.LoadScene(sceneName[sceneIndex]);
     }
     public void StartCrossFade(bool active)
     {
