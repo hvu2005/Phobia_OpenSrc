@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a17cfa4765532204e89e58baf7dbdde5, type: 3}
-  m_Name: Devil
+  m_Name: Devil 0
   m_EditorClassIdentifier: 
-  avatar: {fileID: 0}
+  avatar: {fileID: -8851972980115591535, guid: a2f34034b381cec4f95b6a450b85df1d, type: 3}
+  avtSide: 1
   speakerName: Devil
   paragraphs:
-  - "adc\t"
-  - zzz
-  - ssss
+  - you think you can escape here and blame everything 'bout your selftome ?
+  - 'dcm ao that day '
+  - me may beo cuc, dung nghi ba gay nua phan cam lam
   - yyy

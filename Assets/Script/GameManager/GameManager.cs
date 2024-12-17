@@ -32,19 +32,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        switch(currentState)
-        {
-            case GameState.Playing:
-                break;
-            case GameState.Paused:
-                break;
-            case GameState.MainMenu:
-                break;
-        }
-    }
     public void LoadSence()
     {
         sceneIndex++;
