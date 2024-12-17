@@ -13,15 +13,10 @@ public class NPC : MonoBehaviour
         StartCoroutine(WaitForInteract());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     private IEnumerator WaitForInteract()
     {
         yield return new WaitUntil(() => _playerIsCloseBy && InputManager.instance.look > 0f);
-        DialogueManager.instance.SetUpConversation(conversation.paragraphs);
+        DialogueManager.instance.SetUpConversation(conversation);
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

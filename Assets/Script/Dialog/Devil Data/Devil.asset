@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Devil
   m_EditorClassIdentifier: 
   avatar: {fileID: 0}
-  speakerName: 
+  speakerName: Devil
   paragraphs:
   - "adc\t"
   - zzz

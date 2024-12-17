@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager instance;
 
-    [SerializeField] private Text dialogText;
+    [SerializeField] private TMP_Text dialogText;
+    [SerializeField] private TMP_Text speakerName;
+
     [SerializeField] private GameObject dialogPanel;
     [SerializeField] private string[] dialogue;
     private Queue<string> paragraphs = new Queue<string>();
@@ -25,27 +28,31 @@ public class DialogueManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        OpenDialogue(dialogue);
     }
-
-    // Update is called once per frame
-    void Update()
+    private IEnumerator StartConversation()
     {
-        if (InputManager.instance.isGetAnyKeyDown && !isTyping)
+        while (paragraphs.Count > 0)
         {
+            yield return new WaitUntil(() => InputManager.instance.isGetAnyKeyDown && !isTyping);
             NextLine();
         }
+        //end conversation
+        yield return new WaitUntil(() => InputManager.instance.isGetAnyKeyDown && !isTyping);
+        NextLine();
     }
-    private void OpenDialogue(string[] conversation)
+    private void OpenDialogue(ConversationData conversation)
     {
-        //PlayerBehave.instance.canMove = false;
+
         InputManager.instance.canGetAction = false;
-        foreach (string dialogue in conversation)
+
+        foreach (string dialogue in conversation.paragraphs)
         {
             paragraphs.Enqueue(dialogue);
         }
+        speakerName.text = conversation.speakerName + ":";
         dialogPanel.SetActive(true);
-        StartCoroutine(Typing(paragraphs.Dequeue()));
+
+        StartCoroutine(StartConversation());
     }
     private IEnumerator Typing(string s)
     {
@@ -53,8 +60,8 @@ public class DialogueManager : MonoBehaviour
         yield return new WaitForSeconds(0.75f);
         foreach (char c in s)
         {
-            dialogText.GetComponent<Text>().text += c;
-            yield return new WaitForSeconds(0.01f);
+            dialogText.text += c;
+            yield return new WaitForSeconds(0.02f);
         }
         isTyping = false;
     }
@@ -62,19 +69,18 @@ public class DialogueManager : MonoBehaviour
     {
         if (paragraphs.Count > 0)
         {
-            dialogText.GetComponent<Text>().text = "";
+            dialogText.text = "";
             StartCoroutine(Typing(paragraphs.Dequeue()));
         }
         else
         {
-            dialogText.GetComponent<Text>().text = "";
+            dialogText.text = "";
             dialogPanel.SetActive(false);
-            //PlayerBehave.instance.canMove = true;
             InputManager.instance.canGetAction = true;
         }
     }
 
-    public void SetUpConversation(string[] converstation)
+    public void SetUpConversation(ConversationData converstation)
     {
         OpenDialogue(converstation);
     }
