@@ -7,7 +7,7 @@ using DG.Tweening;
 using Unity.VisualScripting;
 public class DialogueManager : MonoBehaviour
 {
-    public static DialogueManager instance;
+    public static DialogueManager instance { get; private set; }
 
     public bool isEndedConversation {  get; private set; } 
 

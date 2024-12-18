@@ -19,6 +19,7 @@ public class NPC : MonoBehaviour
         yield return new WaitUntil(() => _playerIsCloseBy && InputManager.instance.look > 0f);
         Flip();
         DialogueManager.instance.SetUpConversation(conversationData);
+        StartCoroutine(returnSide());
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -29,8 +30,13 @@ public class NPC : MonoBehaviour
     }
     private void Flip()
     {
-        //Vector3 localScaleX = transform.localScale;
-        //localScaleX.x *= -1;
-        //transform.localScale = localScaleX;
+        float playerX = FindAnyObjectByType<PlayerBehave>().transform.position.x;
+        float flipRotationY = (transform.position.x -  playerX < 0f) ? 180f : 0f;
+        transform.rotation = Quaternion.Euler(0f, flipRotationY, 0f);
+    }
+    private IEnumerator returnSide()
+    {
+        yield return new WaitUntil(() => InputManager.instance.canGetAction);
+        transform.rotation = Quaternion.Euler(0f, 0f, 0f);
     }
 }

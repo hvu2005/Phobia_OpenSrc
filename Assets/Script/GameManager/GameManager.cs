@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static GameManager instance { get; private set; }
     [SerializeField] private GameObject startCrossFade;
     [SerializeField] private GameObject endCrossFade;
     //~~~~~~~~~~~~~SceneManage~~~~~~~~~~~~~~~~~~
@@ -14,8 +14,6 @@ public class GameManager : MonoBehaviour
     private int sceneIndex = 0; 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     private GameState currentState;
-
-    // Instantiate ScriptableObject Data
 
     // Start is called before the first frame update
     void Awake()

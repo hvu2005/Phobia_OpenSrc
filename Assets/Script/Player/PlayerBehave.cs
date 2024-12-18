@@ -1,22 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using UnityEditor.XR;
 using UnityEngine;
 
 public class PlayerBehave : MonoBehaviour
 {
     public Rigidbody2D rb { get; private set; }
     [SerializeField] private float moveSpeed;
-    [SerializeField] private float jumpForce;
     public bool canMove { get; set; } = true;
-    private bool isFacingRight = true;
+    private bool _isFacingRight = true;
     //~~~~~~~~~~~~~~~~~~~~GroundCheck~~~~~~~~~~~~~~~~~~~~
+    [Header("GroundCheck")]
     [SerializeField] private Vector2 groundCheckOffset;
     [SerializeField] private LayerMask whatIsGround;
     [SerializeField] private float checkGroundRange;
     public bool isGrounded { get; private set; }
-    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    private bool isSlashing;
+    //~~~~~~~~~~~~~~~~~~~~~Slashing~~~~~~~~~~~~~~~~~~~~~~
+    [Header("Slashing")]
+    private bool _isSlashing;
+    //~~~~~~~~~~~~~~~~~~~~~~Jumping~~~~~~~~~~~~~~~~~~~~~~
+    [Header("Jumping")]
+    [SerializeField] private float jumpForce;
+    [SerializeField] private float jumpTime;
+    private float _jumpTimeCounter;
+    private bool _canJump;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,9 +48,9 @@ public class PlayerBehave : MonoBehaviour
     }
     private void Flip()
     {
-        if (InputManager.instance.move > 0f && !isFacingRight || InputManager.instance.move < 0f && isFacingRight)
+        if (InputManager.instance.move > 0f && !_isFacingRight || InputManager.instance.move < 0f && _isFacingRight)
         {
-            isFacingRight = !isFacingRight;
+            _isFacingRight = !_isFacingRight;
             Vector3 localScaleX = transform.localScale;
             localScaleX.x *= -1;
             transform.localScale = localScaleX; 
@@ -51,10 +62,21 @@ public class PlayerBehave : MonoBehaviour
     }
     private void Jumping()
     {
-        if(InputManager.instance.isJumping && isGrounded)
+        if(isGrounded)
+        {
+            _jumpTimeCounter = jumpTime;
+            _canJump = true;
+        }
+        if(InputManager.instance.isJumping && _jumpTimeCounter > 0f && _canJump)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            _jumpTimeCounter -= Time.deltaTime;
         }
+        if(!InputManager.instance.isJumping && !isGrounded)
+        {
+            _canJump = false;
+        }
+
     }
     private void GroundCheck()
     {
@@ -65,7 +87,7 @@ public class PlayerBehave : MonoBehaviour
     }
     private void Slashing()
     {
-        if(InputManager.instance.isSlashing && !isSlashing)
+        if(InputManager.instance.isSlashing && !_isSlashing)
         {
 
         }

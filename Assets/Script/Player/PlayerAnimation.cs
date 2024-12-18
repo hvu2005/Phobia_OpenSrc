@@ -11,7 +11,7 @@ public class PlayerAnimation : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBehave>();
+        player = GetComponent<PlayerBehave>();
         animator = GetComponent<Animator>();
     }
 
