@@ -12,7 +12,8 @@ public class InputManager : MonoBehaviour
     public float look { get; private set; }
     public bool isJumping { get; private set; }
     public bool isSlashing { get; private set; }
-    public bool isGetAnyKeyDown {  get; private set; }
+    public bool slash {  get; private set; }
+    public bool isGetAnyKeyDown { get; private set; }
 
     private bool _canSlash = true;
     // Start is called before the first frame update
@@ -50,7 +51,8 @@ public class InputManager : MonoBehaviour
     #region Slashing
     private void Slashing()
     {
-        if(_canSlash && Input.GetKey(_data.slash))
+        slash = _canSlash && Input.GetKey(_data.slash);
+        if(slash)
         {
             StartCoroutine(IESlashing());
         }
@@ -61,6 +63,7 @@ public class InputManager : MonoBehaviour
         isSlashing = true;
         yield return new WaitForSeconds(0.25f);
         isSlashing = false;
+        yield return new WaitForSeconds(0.1f);
         _canSlash = true;
     }
     #endregion

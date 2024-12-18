@@ -7,7 +7,8 @@ public class PlayerAnimation : MonoBehaviour
     private PlayerBehave player;
     private Animator animator;
     [SerializeField] private GameObject jumpSmoke;
-    private bool wasFalling;
+    private bool _wasFalling;
+    private int _attackIndex;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,16 +24,25 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetBool("isFalling", player.rb.velocity.y < 0f);
         if(animator.GetBool("isFalling"))
         {
-            wasFalling = true;
+            _wasFalling = true;
         }
-        if(player.isGrounded && wasFalling)
+        if(player.isGrounded && _wasFalling)
         {
             StartCoroutine(JumpSmoke());
-            wasFalling = false;
+            _wasFalling = false;
         }
         animator.SetBool("isSlashing", InputManager.instance.isSlashing);
+        AttackIndex();        
 
     }
+    private void AttackIndex()
+    {
+        if(InputManager.instance.slash)
+        {
+            animator.SetInteger("attackIndex", player.attackIndex);
+        }
+    }
+
     private IEnumerator JumpSmoke()
     {
         jumpSmoke.SetActive(true);

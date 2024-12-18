@@ -18,7 +18,10 @@ public class PlayerBehave : MonoBehaviour
     public bool isGrounded { get; private set; }
     //~~~~~~~~~~~~~~~~~~~~~Slashing~~~~~~~~~~~~~~~~~~~~~~
     [Header("Slashing")]
+    [SerializeField] private GameObject horizontalSlasher;
+    [SerializeField] private GameObject verticalSlasher;
     private bool _isSlashing;
+    public int attackIndex { get; private set; }
     //~~~~~~~~~~~~~~~~~~~~~~Jumping~~~~~~~~~~~~~~~~~~~~~~
     [Header("Jumping")]
     [SerializeField] private float jumpForce;
@@ -49,7 +52,6 @@ public class PlayerBehave : MonoBehaviour
     }
     private void Flip()
     {
-        Debug.Log(InputManager.instance.isSlashing);
         if(!InputManager.instance.isSlashing)
         {
             if (InputManager.instance.move > 0f && !_isFacingRight || InputManager.instance.move < 0f && _isFacingRight)
@@ -60,6 +62,10 @@ public class PlayerBehave : MonoBehaviour
                 transform.localScale = localScaleX;
             }
         }
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        
     }
     private void Moving()
     {
@@ -91,9 +97,18 @@ public class PlayerBehave : MonoBehaviour
     }
     private void Slashing()
     {
-        if(InputManager.instance.isSlashing)
+        if (InputManager.instance.slash)
         {
-            
+            if (InputManager.instance.look != 0f && !isGrounded)
+            {
+                attackIndex = InputManager.instance.look < 0f ? 3 : 2;
+            }
+            else
+            {
+                horizontalSlasher.SetActive(true);
+                attackIndex++;
+                attackIndex %= 2;
+            }
         }
     }
 }
