@@ -1580,12 +1580,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  jumpForce: 8
   groundCheckOffset: {x: -0.29, y: 1.95}
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
   checkGroundRange: 0.6
+  jumpForce: 8
   jumpTime: 0.2
 --- !u!95 &1713542146
 Animator:

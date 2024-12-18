@@ -30,6 +30,8 @@ public class PlayerAnimation : MonoBehaviour
             StartCoroutine(JumpSmoke());
             wasFalling = false;
         }
+        animator.SetBool("isSlashing", InputManager.instance.isSlashing);
+
     }
     private IEnumerator JumpSmoke()
     {

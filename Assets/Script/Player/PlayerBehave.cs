@@ -42,18 +42,23 @@ public class PlayerBehave : MonoBehaviour
             return;
         }
         Moving();
+        Slashing();
         Jumping();
         GroundCheck();
         Flip();
     }
     private void Flip()
     {
-        if (InputManager.instance.move > 0f && !_isFacingRight || InputManager.instance.move < 0f && _isFacingRight)
+        Debug.Log(InputManager.instance.isSlashing);
+        if(!InputManager.instance.isSlashing)
         {
-            _isFacingRight = !_isFacingRight;
-            Vector3 localScaleX = transform.localScale;
-            localScaleX.x *= -1;
-            transform.localScale = localScaleX; 
+            if (InputManager.instance.move > 0f && !_isFacingRight || InputManager.instance.move < 0f && _isFacingRight)
+            {
+                _isFacingRight = !_isFacingRight;
+                Vector3 localScaleX = transform.localScale;
+                localScaleX.x *= -1;
+                transform.localScale = localScaleX;
+            }
         }
     }
     private void Moving()
@@ -76,7 +81,6 @@ public class PlayerBehave : MonoBehaviour
         {
             _canJump = false;
         }
-
     }
     private void GroundCheck()
     {
@@ -87,9 +91,9 @@ public class PlayerBehave : MonoBehaviour
     }
     private void Slashing()
     {
-        if(InputManager.instance.isSlashing && !_isSlashing)
+        if(InputManager.instance.isSlashing)
         {
-
+            
         }
     }
 }

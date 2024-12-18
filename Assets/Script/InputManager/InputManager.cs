@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    public static InputManager instance;
+    public static InputManager instance { get; private set; }
 
     [SerializeField] private InputData _data;
     public bool canGetAction { get; set; } = true;
@@ -12,7 +12,9 @@ public class InputManager : MonoBehaviour
     public float look { get; private set; }
     public bool isJumping { get; private set; }
     public bool isSlashing { get; private set; }
-    public bool isGetAnyKeyDown {  get; private set; } 
+    public bool isGetAnyKeyDown {  get; private set; }
+
+    private bool _canSlash = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -45,8 +47,21 @@ public class InputManager : MonoBehaviour
     {
         isJumping = Input.GetKey(_data.jump);
     }
+    #region Slashing
     private void Slashing()
     {
-        isSlashing = Input.GetKey(_data.slash);
+        if(_canSlash && Input.GetKey(_data.slash))
+        {
+            StartCoroutine(IESlashing());
+        }
     }
+    private IEnumerator IESlashing()
+    {
+        _canSlash = false;
+        isSlashing = true;
+        yield return new WaitForSeconds(0.25f);
+        isSlashing = false;
+        _canSlash = true;
+    }
+    #endregion
 }
