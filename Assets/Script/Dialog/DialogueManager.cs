@@ -49,10 +49,7 @@ public class DialogueManager : MonoBehaviour
     }
     private void ZoomCamera(float orthoSize)
     {
-        
-
         DOTween.To(() => _vcam.m_Lens.OrthographicSize, x => _vcam.m_Lens.OrthographicSize = x, orthoSize, 1f);
-
     }
     private IEnumerator StartConversation()
     {
