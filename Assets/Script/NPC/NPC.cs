@@ -7,7 +7,9 @@ using UnityEngine;
 public class NPC : MonoBehaviour
 {
     [SerializeField] private List<ConversationData> conversationData;
+    [SerializeField] private GameObject pointer;
     private bool _playerIsCloseBy;
+    private bool _endConversation;
     private GameObject _player;
     // Start is called before the first frame update
     void Start()
@@ -21,12 +23,16 @@ public class NPC : MonoBehaviour
         yield return new WaitUntil(() => _playerIsCloseBy && InputManager.instance.look > 0f);
         Flip();
         DialogueManager.instance.SetUpConversation(conversationData);
+        pointer.transform.DOScale(0f, 0.15f);
+        _endConversation = true;
         StartCoroutine(returnSide());
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if(collision.CompareTag("Player") && !_endConversation)
         {
+            pointer.transform.DOScale(1f, 0.15f);
+
             _playerIsCloseBy = true;
         }
     }
@@ -35,6 +41,8 @@ public class NPC : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            pointer.transform.DOScale(0f, 0.15f);
+
             _playerIsCloseBy = false;
         }
     }

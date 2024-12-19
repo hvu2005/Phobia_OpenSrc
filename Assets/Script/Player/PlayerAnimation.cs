@@ -32,17 +32,12 @@ public class PlayerAnimation : MonoBehaviour
             _wasFalling = false;
         }
         animator.SetBool("isSlashing", InputManager.instance.isSlashing);
-        AttackIndex();        
-
-    }
-    private void AttackIndex()
-    {
-        if(InputManager.instance.slash)
+        if (InputManager.instance.slash)
         {
             animator.SetInteger("attackIndex", player.attackIndex);
         }
-    }
 
+    }
     private IEnumerator JumpSmoke()
     {
         jumpSmoke.SetActive(true);

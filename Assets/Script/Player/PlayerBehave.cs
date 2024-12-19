@@ -108,13 +108,32 @@ public class PlayerBehave : MonoBehaviour
             if (InputManager.instance.look != 0f)
             {
                 attackIndex = InputManager.instance.look < 0f ? 3 : 2;
+                verticalSlasher.transform.localScale = InputManager.instance.look > 0f ? Vector3.one : new Vector3(1f, -1f, 1f);
+                StartCoroutine(SlashBox(verticalSlasher, new Vector3(0f,2.75f,0f)));
             }
             else
             {
-                horizontalSlasher.SetActive(true);
+                StartCoroutine(SlashBox(horizontalSlasher));
                 attackIndex++;
                 attackIndex %= 2;
             }
         }
+    }
+
+    private IEnumerator SlashBox(GameObject slasher, Vector3? offset = null)
+    {
+        Vector3 finalOffset = offset ?? Vector3.zero;
+
+        Vector3 localScale = slasher.transform.localScale;
+        localScale.x = _isFacingRight ? 1 : -1;
+        slasher.transform.localScale = localScale;
+
+        slasher.SetActive(true);        
+        while(InputManager.instance.isSlashing)
+        {
+            slasher.transform.position = transform.position + finalOffset;
+            yield return null;
+        }
+        slasher.SetActive(false);
     }
 }
