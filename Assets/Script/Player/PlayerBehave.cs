@@ -50,6 +50,12 @@ public class PlayerBehave : MonoBehaviour
         GroundCheck();
         Flip();
     }
+    public void ForceToFlip(bool isFacingRight)
+    {
+        _isFacingRight = isFacingRight;
+        Vector3 localScale = isFacingRight ? Vector3.one : new Vector3(-1f, 1f, 1f);
+        transform.localScale = localScale;
+    }
     private void Flip()
     {
         if(!InputManager.instance.isSlashing)
@@ -99,7 +105,7 @@ public class PlayerBehave : MonoBehaviour
     {
         if (InputManager.instance.slash)
         {
-            if (InputManager.instance.look != 0f && !isGrounded)
+            if (InputManager.instance.look != 0f)
             {
                 attackIndex = InputManager.instance.look < 0f ? 3 : 2;
             }
