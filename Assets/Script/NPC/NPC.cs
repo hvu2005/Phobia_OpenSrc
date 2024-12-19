@@ -1,25 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using DG.Tweening;
 using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
     [SerializeField] private List<ConversationData> conversationData;
-    private CinemachineVirtualCamera vcam;
     private bool _playerIsCloseBy;
     private GameObject _player;
     // Start is called before the first frame update
     void Start()
     {
-        vcam = Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera as CinemachineVirtualCamera;
         _player = GameObject.FindGameObjectWithTag("Player");
         StartCoroutine(WaitForInteract());
     }
-    private void ZoomCamera()
-    {
-        float originOrthoSize = vcam.m_Lens.OrthographicSize;
-    }
+
     private IEnumerator WaitForInteract()
     {
         yield return new WaitUntil(() => _playerIsCloseBy && InputManager.instance.look > 0f);

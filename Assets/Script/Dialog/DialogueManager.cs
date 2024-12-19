@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 using Unity.VisualScripting;
+using Cinemachine;
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager instance { get; private set; }
@@ -21,11 +22,14 @@ public class DialogueManager : MonoBehaviour
     private Queue<string> _paragraphs = new Queue<string>();
     private Queue<ConversationData> _conversationQueue = new Queue<ConversationData>();
 
+    private CinemachineVirtualCamera _vcam;
+    private float _originOrthoSize;
+
     private bool _isTyping;
     private Coroutine _typingCoroutine;
     private Coroutine _skipTypingCoroutine;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (instance == null)
         {
@@ -36,6 +40,19 @@ public class DialogueManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+    void Start()
+    {
+        _vcam = Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera as CinemachineVirtualCamera;
+        _originOrthoSize = _vcam.m_Lens.OrthographicSize;
+        
+    }
+    private void ZoomCamera(float orthoSize)
+    {
+        
+
+        DOTween.To(() => _vcam.m_Lens.OrthographicSize, x => _vcam.m_Lens.OrthographicSize = x, orthoSize, 1f);
+
     }
     private IEnumerator StartConversation()
     {
@@ -53,6 +70,7 @@ public class DialogueManager : MonoBehaviour
         isEndedConversation = false;
 
         //InputManager.instance.canGetAction = false;
+        ZoomCamera(3.5f);
 
         foreach (string dialogue in conversation.paragraphs)
         {
@@ -148,6 +166,8 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitUntil(() => isEndedConversation);
             yield return new WaitForSeconds(0.5f);
         }
+
+        ZoomCamera(_originOrthoSize);
         InputManager.instance.canGetAction = true;
         yield return null;
 
