@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float hp;
 
     //~~~~~~~~~~~~~~~~~DetectPlayer~~~~~~~~~~~~~~~~~~~
-    [Header("DetectPlayerSystem")]
+    [Header("Detect Player System")]
     [SerializeField] private LayerMask whatIsPlayer;
     [SerializeField] private float detectRadius;
     [SerializeField] private float detectDistance;
@@ -21,23 +21,27 @@ public class Enemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();   
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Slash"))
         {
             hp--;
+            if(hp <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
     
-    private void DetectPlayer()
+    public bool DetectedPlayer()
     {
-
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position + detectOffset, detectRadius, Vector2.down, detectDistance, whatIsPlayer);
+        return hit.collider != null;
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position + detectOffset, detectRadius);
     }
 }

@@ -1953,7 +1953,7 @@ GameObject:
   - component: {fileID: 1713542144}
   - component: {fileID: 1713542143}
   - component: {fileID: 1713542146}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -2746,8 +2746,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77975a01fbbdae748b6f68f669dca416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rb: {fileID: 0}
   hp: 3
-  moveSpeed: 3
+  whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 128
+  detectRadius: 5
+  detectDistance: 3
+  detectOffset: {x: 0, y: 0.5, z: 0}
 --- !u!224 &599547157612396705
 RectTransform:
   m_ObjectHideFlags: 0
