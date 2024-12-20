@@ -152,11 +152,13 @@ public class DialogueManager : MonoBehaviour
     }
     private IEnumerator IESetUpConversation(List<ConversationData> converstations)
     {
-        foreach(ConversationData conversation in converstations)
+        InputManager.instance.canGetAction = false;
+
+        foreach (ConversationData conversation in converstations)
         {
             _conversationQueue.Enqueue(conversation);
         }
-        InputManager.instance.canGetAction = false;
+
         while (_conversationQueue.Count > 0)
         {
             OpenDialogue(_conversationQueue.Dequeue());

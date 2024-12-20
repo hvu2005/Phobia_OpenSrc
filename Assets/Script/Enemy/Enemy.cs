@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -7,8 +8,7 @@ public class Enemy : MonoBehaviour
 {
     [HideInInspector] public Rigidbody2D rb;
 
-    [SerializeField] private float hp;
-
+    [SerializeField] private int hp;
     //~~~~~~~~~~~~~~~~~DetectPlayer~~~~~~~~~~~~~~~~~~~
     [Header("Detect Player System")]
     [SerializeField] private LayerMask whatIsPlayer;
@@ -19,9 +19,10 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();   
+        rb = GetComponent<Rigidbody2D>();
+        StartCoroutine(Patrolling());
     }
-    
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Slash"))
@@ -33,7 +34,12 @@ public class Enemy : MonoBehaviour
             }
         }
     }
-    
+
+    private IEnumerator Patrolling()
+    {
+        yield return null;
+    }
+
     public bool DetectedPlayer()
     {
         RaycastHit2D hit = Physics2D.CircleCast(transform.position + detectOffset, detectRadius, Vector2.down, detectDistance, whatIsPlayer);
