@@ -8,6 +8,9 @@ public class InputManager : MonoBehaviour
     public static InputManager instance { get; private set; }
 
     [SerializeField] private PlayerInput data;
+
+    public PlayerInput Data => data;
+
     public bool canGetAction { get; set; } = true;
     public float move { get; private set; }
     public float look { get; private set; }
