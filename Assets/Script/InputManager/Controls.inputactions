@@ -24,15 +24,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "dash",
-                    "type": "Button",
-                    "id": "e70a3717-f576-4e9b-a834-159dd3aac6ba",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "move",
                     "type": "Value",
                     "id": "6b1877df-d985-482d-8f33-6ff4529220d2",
@@ -80,17 +71,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "05d326c0-dbb9-4ee3-91dc-8c7c3c11e33c",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

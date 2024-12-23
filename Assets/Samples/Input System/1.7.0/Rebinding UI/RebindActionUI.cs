@@ -208,7 +208,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
 
             // Set on label (if any).
             if (m_BindingText != null)
-                m_BindingText.text = displayString;
+                m_BindingText.text = "[" + displayString + "]";
 
             // Give listeners a chance to configure UI in response.
             m_UpdateBindingUIEvent?.Invoke(this, displayString, deviceLayoutName, controlPath);
@@ -290,6 +290,8 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                         m_RebindOverlay?.SetActive(false);
                         m_RebindStopEvent?.Invoke(this, operation);
                         UpdateBindingDisplay();
+
+                        CheckDuplicateBindings(action, bindingIndex, allCompositeParts);
                         CleanUp();
 
                         // If there's more composite parts we should bind, initiate a rebind
@@ -326,6 +328,28 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             m_RebindStartEvent?.Invoke(this, m_RebindOperation);
 
             m_RebindOperation.Start();
+        }
+
+        private void CheckDuplicateBindings(InputAction action, int bindingIndex, bool allCompositeParts = false)
+        {
+            InputBinding newBinding = action.bindings[bindingIndex];
+
+            var actionMap = m_Action.action.actionMap;
+
+            for(int i = 0; i < actionMap.bindings.Count; i ++)
+            {
+                if(actionMap.bindings[i].effectivePath == newBinding.effectivePath)
+                {
+                    if (actionMap.bindings[i].action == newBinding.action && actionMap.bindings[i].name != newBinding.name)
+                    {
+                        actionMap.ApplyBindingOverride(i, new InputBinding { overridePath = " " });
+                    }
+                    else if (actionMap.bindings[i].action != newBinding.action)
+                    {
+                        actionMap.ApplyBindingOverride(i, new InputBinding { overridePath = " " });
+                    }
+                }
+            }
         }
 
         protected void OnEnable()
