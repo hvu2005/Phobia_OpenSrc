@@ -16,6 +16,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
     /// </summary>
     public class RebindActionUI : MonoBehaviour
     {
+
         /// <summary>
         /// Reference to the action that is to be rebound.
         /// </summary>
@@ -162,6 +163,8 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         /// <param name="action"></param>
         /// <param name="bindingIndex"></param>
         /// <returns></returns>
+        /// 
+
         public bool ResolveActionAndBinding(out InputAction action, out int bindingIndex)
         {
             bindingIndex = -1;
@@ -420,12 +423,17 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
 
         private static List<RebindActionUI> s_RebindActionUIs;
 
+
+        [Header("Customize UI")]
+        [SerializeField] private bool m_CustomUILabelOverRide;
+        [SerializeField] private string customLabel;
+
         // We want the label for the action name to update in edit mode, too, so
         // we kick that off from here.
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         protected void OnValidate()
         {
-            //UpdateActionLabel();
+            UpdateActionLabel();
             UpdateBindingDisplay();
         }
 
@@ -435,8 +443,16 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         {
             if (m_ActionLabel != null)
             {
-                var action = m_Action?.action;
-                m_ActionLabel.text = action != null ? action.name : string.Empty;
+                if (!m_CustomUILabelOverRide)
+                {
+                    var action = m_Action?.action;
+                    m_ActionLabel.text = action != null ? action.name : string.Empty;
+                    customLabel = String.Empty;
+                }
+                else
+                {
+                    m_ActionLabel.text = customLabel;
+                }
             }
         }
 

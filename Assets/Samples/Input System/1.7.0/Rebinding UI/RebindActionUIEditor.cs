@@ -15,6 +15,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
     {
         protected void OnEnable()
         {
+            
             m_ActionProperty = serializedObject.FindProperty("m_Action");
             m_BindingIdProperty = serializedObject.FindProperty("m_BindingId");
             m_ActionLabelProperty = serializedObject.FindProperty("m_ActionLabel");
@@ -25,6 +26,9 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             m_RebindStartEventProperty = serializedObject.FindProperty("m_RebindStartEvent");
             m_RebindStopEventProperty = serializedObject.FindProperty("m_RebindStopEvent");
             m_DisplayStringOptionsProperty = serializedObject.FindProperty("m_DisplayStringOptions");
+
+            m_ActionCustomUILabelOverRide = serializedObject.FindProperty("m_CustomUILabelOverRide");
+            m_ActionOverRideStringProperty = serializedObject.FindProperty("customLabel");
 
             RefreshBindingOptions();
         }
@@ -62,6 +66,16 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
                 EditorGUILayout.PropertyField(m_BindingTextProperty);
                 EditorGUILayout.PropertyField(m_RebindOverlayProperty);
                 EditorGUILayout.PropertyField(m_RebindTextProperty);
+            }
+
+            // Customize UI section
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField(m_CustomizeLabel, Styles.boldLabel);
+            using (new EditorGUI.IndentLevelScope())
+            {
+                EditorGUILayout.PropertyField(m_ActionCustomUILabelOverRide);
+                EditorGUILayout.PropertyField(m_ActionOverRideStringProperty);
+
             }
 
             // Events section.
@@ -159,10 +173,14 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
         private SerializedProperty m_RebindStopEventProperty;
         private SerializedProperty m_UpdateBindingUIEventProperty;
         private SerializedProperty m_DisplayStringOptionsProperty;
+        private SerializedProperty m_ActionCustomUILabelOverRide;
+        private SerializedProperty m_ActionOverRideStringProperty;
+
 
         private GUIContent m_BindingLabel = new GUIContent("Binding");
         private GUIContent m_DisplayOptionsLabel = new GUIContent("Display Options");
         private GUIContent m_UILabel = new GUIContent("UI");
+        private GUIContent m_CustomizeLabel = new GUIContent("Customize Label");
         private GUIContent m_EventsLabel = new GUIContent("Events");
         private GUIContent[] m_BindingOptions;
         private string[] m_BindingOptionValues;
