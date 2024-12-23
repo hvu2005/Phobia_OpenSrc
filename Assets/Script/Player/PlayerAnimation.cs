@@ -8,7 +8,6 @@ public class PlayerAnimation : MonoBehaviour
     private Animator animator;
     [SerializeField] private GameObject jumpSmoke;
     private bool _wasFalling;
-    private int _attackIndex;
     // Start is called before the first frame update
     void Start()
     {

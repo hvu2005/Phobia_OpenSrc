@@ -23,6 +23,7 @@ public class MenuManager : MonoBehaviour
     [Header("First Selected Options")]
     [SerializeField] private GameObject resumeButton;
     [SerializeField] private GameObject controlsButton;
+    [SerializeField] private GameObject lookUpKeybindingButton;
     private Dictionary<GameObject, GameObject> _firstSelectedOptions = new Dictionary<GameObject, GameObject>();
 
 
@@ -31,7 +32,8 @@ public class MenuManager : MonoBehaviour
     private void InitializeFirstSelectedOptions()
     {
         _firstSelectedOptions.Add(mainMenu, resumeButton);
-        _firstSelectedOptions.Add(controlsMenu, controlsButton);
+        _firstSelectedOptions.Add(settingsMenu, controlsButton);
+        _firstSelectedOptions.Add(controlsMenu, lookUpKeybindingButton);
     }
     // Start is called before the first frame update
     void Start()
@@ -82,14 +84,11 @@ public class MenuManager : MonoBehaviour
     }
     public void OnOpenMainMenu()
     {
-        PushToStack(mainMenu, resumeButton);
-
-
-
+        PushToStack(mainMenu);
     }
     public void OnOpenSettingsMenu()
     {
-        PushToStack(settingsMenu, controlsButton);
+        PushToStack(settingsMenu);
 
     }
 
@@ -97,17 +96,12 @@ public class MenuManager : MonoBehaviour
     
     public void OnOpenControlsMenu()
     {
-        //chua xong
         PushToStack(controlsMenu);
-
-
     }
 
     public void OnOpenAudioMenu()
     {
         PushToStack(audioMenu);
-
-
     }
     #endregion
 
@@ -135,7 +129,7 @@ public class MenuManager : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(null);
     }
 
-    private void PushToStack(GameObject menu, GameObject firstSelectedOptions = null)
+    private void PushToStack(GameObject menu)
     {
         if(menuStack.Count > 0)
         {
@@ -145,7 +139,10 @@ public class MenuManager : MonoBehaviour
         menu.SetActive(true);
         menuStack.Push(menu);
 
-        EventSystem.current.SetSelectedGameObject(firstSelectedOptions);
+        if (_firstSelectedOptions.ContainsKey(menu))
+        {
+            EventSystem.current.SetSelectedGameObject(_firstSelectedOptions[menu]);
+        }
     }
 }
 
