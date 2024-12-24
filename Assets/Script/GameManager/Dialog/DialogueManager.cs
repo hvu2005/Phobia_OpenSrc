@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
-using Unity.VisualScripting;
 using Cinemachine;
 public class DialogueManager : MonoBehaviour
 {
@@ -17,7 +16,6 @@ public class DialogueManager : MonoBehaviour
 
     [SerializeField] private GameObject avatar;
     [SerializeField] private GameObject dialogPanel;
-    [SerializeField] private string[] dialogue;
 
     private Queue<string> _paragraphs = new Queue<string>();
     private Queue<ConversationData> _conversationQueue = new Queue<ConversationData>();

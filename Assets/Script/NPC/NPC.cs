@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Cinemachine;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 
 public class NPC : MonoBehaviour
 {
     [SerializeField] private List<ConversationData> conversationData;
     [SerializeField] private GameObject pointer;
+    private TextMeshPro interactText;
     private bool _playerIsCloseBy;
     private bool _endConversation;
     private GameObject _player;
@@ -15,6 +18,7 @@ public class NPC : MonoBehaviour
     void Start()
     {
         _player = GameObject.FindGameObjectWithTag("Player");
+        interactText = pointer.GetComponentInChildren<TextMeshPro>();
         StartCoroutine(WaitForInteract());
     }
 
@@ -32,8 +36,15 @@ public class NPC : MonoBehaviour
         if(collision.CompareTag("Player") && !_endConversation)
         {
             pointer.transform.DOScale(1f, 0.15f);
-
             _playerIsCloseBy = true;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if(collision.CompareTag("Player") && !_endConversation)
+        {
+            interactText.text = InputManager.instance.Data.actions["look"].bindings[2].ToDisplayString();
         }
     }
 
