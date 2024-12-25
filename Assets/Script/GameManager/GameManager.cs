@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,14 +13,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject endCrossFade;
     //~~~~~~~~~~~~~SceneManage~~~~~~~~~~~~~~~~~~
     [SerializeField] private string[] sceneName;
-    private int sceneIndex = 0; 
+    private int sceneIndex = 0;
+    //~~~~~~~~~~~~~~~~TakeDmg~~~~~~~~~~~~~~~~~~~
+    [SerializeField] private GameObject takeDmg;
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    private GameState currentState;
+    [SerializeField] private TextMeshProUGUI hpText;
 
     // Start is called before the first frame update
     void Awake()
     {
-        currentState = GameState.Playing;
         if(instance == null)
         {
             instance = this;
@@ -44,10 +47,25 @@ public class GameManager : MonoBehaviour
     {
         endCrossFade.SetActive(active);
     }
-}
-public enum GameState
-{
-    MainMenu,
-    Playing,
-    Paused
+
+    public void UpdatePlayerHp(int hp)
+    {
+        hpText.text = hp.ToString();
+    }
+
+    public void TakeDmgScreen()
+    {
+        StartCoroutine(TakeDmgCoroutine());
+    }
+    private IEnumerator TakeDmgCoroutine()
+    {
+        takeDmg.SetActive(true);
+
+        takeDmg.GetComponent<Image>().DOFade(1f, 0.2f);
+        yield return new WaitForSeconds(0.5f);
+        takeDmg.GetComponent<Image>().DOFade(0f, 1.5f).OnComplete(() =>
+        {
+            takeDmg.SetActive(false);
+        });
+    }
 }

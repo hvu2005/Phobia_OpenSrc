@@ -85,6 +85,7 @@ public class MenuManager : MonoBehaviour
     public void OnOpenMainMenu()
     {
         PushToStack(mainMenu);
+        
     }
     public void OnOpenSettingsMenu()
     {

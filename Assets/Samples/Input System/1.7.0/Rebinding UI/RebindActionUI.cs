@@ -9,7 +9,7 @@ using TMPro;
 
 ////TODO: deal with composites that have parts bound in different control schemes
 
-/// hvu modified
+// modified by hvu
 
 
 namespace UnityEngine.InputSystem.Samples.RebindUI
@@ -343,13 +343,10 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             {
                 if(actionMap.bindings[i].effectivePath == newBinding.effectivePath)
                 {
-                    if (actionMap.bindings[i].action == newBinding.action && actionMap.bindings[i].name != newBinding.name)
+                    if ((actionMap.bindings[i].action == newBinding.action && actionMap.bindings[i].name != newBinding.name) 
+                        || (actionMap.bindings[i].action != newBinding.action))
                     {
-                        actionMap.ApplyBindingOverride(i, new InputBinding { overridePath = " " });
-                    }
-                    else if (actionMap.bindings[i].action != newBinding.action)
-                    {
-                        actionMap.ApplyBindingOverride(i, new InputBinding { overridePath = " " });
+                        actionMap.ApplyBindingOverride(i, new InputBinding { overridePath = "  " });
                     }
                 }
             }

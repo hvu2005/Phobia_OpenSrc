@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using System.Timers;
 using UnityEditor.XR;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class PlayerBehave : MonoBehaviour
     [SerializeField] private float moveSpeed;
     public bool canMove { get; set; } = true;
     private bool _isFacingRight = true;
+    [SerializeField] private int hp;
     //~~~~~~~~~~~~~~~~~~~~GroundCheck~~~~~~~~~~~~~~~~~~~~
     [Header("GroundCheck")]
     [SerializeField] private Vector2 groundCheckOffset;
@@ -28,6 +30,10 @@ public class PlayerBehave : MonoBehaviour
     [SerializeField] private float jumpTime;
     private float _jumpTimeCounter;
     private bool _canJump;
+    //~~~~~~~~~~~~~~~~~~~~~~TakeDmg~~~~~~~~~~~~~~~~~~~~~~
+    [Header("Take Damage")]
+    [SerializeField] private float immortalDuration;
+    private bool _isImmortal;
 
 
 
@@ -35,12 +41,13 @@ public class PlayerBehave : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        GameManager.instance.UpdatePlayerHp(hp);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(!canMove || !InputManager.instance.canGetAction)
+        if(!InputManager.instance.canGetAction)
         {
             return;
         }
@@ -71,7 +78,14 @@ public class PlayerBehave : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if(collision.CompareTag("Enemy") && !_isImmortal)
+        {
+            TakeDmg();
+            if(hp <= 0)
+            {
+                Debug.Log("chet");
+            }
+        }
     }
     private void Moving()
     {
@@ -100,6 +114,52 @@ public class PlayerBehave : MonoBehaviour
         RaycastHit2D hit = Physics2D.Raycast(pos,Vector2.right,checkGroundRange,whatIsGround);
         isGrounded = hit.collider != null;
         Debug.DrawRay(pos,Vector2.right*checkGroundRange, Color.red);
+    }
+    private void TakeDmg()
+    {
+        _canJump = false;
+
+        GameManager.instance.TakeDmgScreen();
+        StartCoroutine(ImmortalCoroutine());
+        StartCoroutine(KnockBackCoroutine());
+
+        GameManager.instance.UpdatePlayerHp(--hp);
+        
+    }
+    private IEnumerator KnockBackCoroutine()
+    {
+        InputManager.instance.canGetAction = false;
+        float orginGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+        rb.velocity = Vector2.zero; 
+
+        yield return new WaitForSeconds(0.15f);
+        rb.gravityScale = orginGravity;
+        float xPos = _isFacingRight ? -5f : 5f;
+        rb.velocity = new Vector2(xPos, 5f); 
+
+        yield return new WaitForSeconds(0.5f);
+        InputManager.instance.canGetAction = true;
+    }
+    private IEnumerator ImmortalCoroutine()
+    {
+        _isImmortal = true;
+        float elapsedTime = 0f;
+        Color playerColor = GetComponent<SpriteRenderer>().color;
+
+        while (elapsedTime < immortalDuration)
+        {
+            float a = Mathf.PingPong(Time.time / 0.2f, 1f);
+            playerColor.a = Mathf.Lerp(1f, 0f, a);
+            GetComponent<SpriteRenderer>().color = playerColor; 
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        _isImmortal = false;
+        playerColor.a = 1f;
+        GetComponent<SpriteRenderer>().color = playerColor;
     }
     private void Slashing()
     {

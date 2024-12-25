@@ -41,6 +41,7 @@ public class InputManager : MonoBehaviour
     {
         Pause();
         isGetAnyKeyDown = Input.anyKeyDown;
+
         if (!canGetAction) return;
         Moving();
         Jumping();

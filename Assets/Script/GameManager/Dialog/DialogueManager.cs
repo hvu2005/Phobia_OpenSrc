@@ -146,9 +146,9 @@ public class DialogueManager : MonoBehaviour
 
     public void SetUpConversation(List<ConversationData> converstations)
     {
-        StartCoroutine(IESetUpConversation(converstations));
+        StartCoroutine(SetUpConversationCoroutine(converstations));
     }
-    private IEnumerator IESetUpConversation(List<ConversationData> converstations)
+    private IEnumerator SetUpConversationCoroutine(List<ConversationData> converstations)
     {
         InputManager.instance.canGetAction = false;
 

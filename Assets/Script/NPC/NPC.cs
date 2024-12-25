@@ -26,6 +26,7 @@ public class NPC : MonoBehaviour
     {
         yield return new WaitUntil(() => _playerIsCloseBy && InputManager.instance.look > 0f);
         Flip();
+        _player.GetComponent<PlayerBehave>().rb.velocity = Vector2.zero;
         DialogueManager.instance.SetUpConversation(conversationData);
         pointer.transform.DOScale(0f, 0.15f);
         _endConversation = true;

@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+
 public class Enemy : MonoBehaviour
 {
     [HideInInspector] public Rigidbody2D rb;
@@ -16,17 +18,29 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float detectDistance;
     [SerializeField] private Vector3 detectOffset;
 
-    // Start is called before the first frame update
-    void Start()
+    public void Initialize()
     {
         rb = GetComponent<Rigidbody2D>();
         StartCoroutine(Patrolling());
+    }
+
+    private void OnValidate()
+    {
+        gameObject.tag = "Enemy";
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Slash"))
         {
+            if(InputManager.instance.look < 0f)
+            {
+                PlayerBehave player = FindAnyObjectByType<PlayerBehave>();
+                player.rb.velocity = new Vector2(player.rb.velocity.x, 10f);
+            }
+
+
             hp--;
             if(hp <= 0)
             {
