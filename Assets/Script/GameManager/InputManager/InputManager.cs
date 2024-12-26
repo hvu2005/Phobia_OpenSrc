@@ -18,7 +18,6 @@ public class InputManager : MonoBehaviour
     public bool isSlashing { get; private set; }
     public bool slash {  get; private set; }
     public bool isGetAnyKeyDown { get; private set; }
-
     public bool pause { get; private set; }
 
     private bool _canSlash = true;

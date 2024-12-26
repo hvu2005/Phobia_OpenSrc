@@ -14,10 +14,12 @@ public class GameManager : MonoBehaviour
     //~~~~~~~~~~~~~SceneManage~~~~~~~~~~~~~~~~~~
     [SerializeField] private string[] sceneName;
     private int sceneIndex = 0;
-    //~~~~~~~~~~~~~~~~TakeDmg~~~~~~~~~~~~~~~~~~~
-    [SerializeField] private GameObject takeDmg;
+    //~~~~~~~~~~~~~~~TakeDmg~~~~~~~~~~~~~~~~~~~~
+    [SerializeField] private Image takeDmg;
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     [SerializeField] private TextMeshProUGUI hpText;
+    //~~~~~~~~~~~~~~~~Player~~~~~~~~~~~~~~~~~~~~
+    public GameObject player { get; private set; }
 
     // Start is called before the first frame update
     void Awake()
@@ -31,6 +33,10 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     public void LoadSence()
@@ -59,13 +65,13 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator TakeDmgCoroutine()
     {
-        takeDmg.SetActive(true);
+        takeDmg.gameObject.SetActive(true);
 
-        takeDmg.GetComponent<Image>().DOFade(1f, 0.2f);
+        takeDmg.DOFade(1f, 0.2f);
         yield return new WaitForSeconds(0.5f);
-        takeDmg.GetComponent<Image>().DOFade(0f, 1.5f).OnComplete(() =>
+        takeDmg.DOFade(0f, 1.5f).OnComplete(() =>
         {
-            takeDmg.SetActive(false);
+            takeDmg.gameObject.SetActive(false);
         });
     }
 }

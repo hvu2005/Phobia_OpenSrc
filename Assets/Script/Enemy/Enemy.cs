@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
 {
     [HideInInspector] public Rigidbody2D rb;
 
+
     [SerializeField] private int hp;
     //~~~~~~~~~~~~~~~~~DetectPlayer~~~~~~~~~~~~~~~~~~~
     [Header("Detect Player System")]
@@ -18,8 +19,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float detectDistance;
     [SerializeField] private Vector3 detectOffset;
 
+    private PlayerBehave _player;
     public void Initialize()
     {
+        _player = GameManager.instance.player.GetComponent<PlayerBehave>();
         rb = GetComponent<Rigidbody2D>();
         StartCoroutine(Patrolling());
     }
@@ -36,8 +39,7 @@ public class Enemy : MonoBehaviour
         {
             if(InputManager.instance.look < 0f)
             {
-                PlayerBehave player = FindAnyObjectByType<PlayerBehave>();
-                player.rb.velocity = new Vector2(player.rb.velocity.x, 10f);
+                _player.rb.velocity = new Vector2(_player.rb.velocity.x, 10f);
             }
 
 

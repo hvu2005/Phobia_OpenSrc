@@ -6453,7 +6453,7 @@ MonoBehaviour:
   startCrossFade: {fileID: 1611125105}
   endCrossFade: {fileID: 1687211386}
   sceneName: []
-  takeDmg: {fileID: 1370680966}
+  takeDmg: {fileID: 1370680968}
   hpText: {fileID: 562504172}
 --- !u!114 &1842253984
 MonoBehaviour:
