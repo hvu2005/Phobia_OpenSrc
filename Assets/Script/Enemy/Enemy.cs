@@ -1,7 +1,8 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.SceneManagement;
+using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -9,29 +10,34 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [HideInInspector] public Rigidbody2D rb;
-
-
     [SerializeField] private int hp;
+
     //~~~~~~~~~~~~~~~~~DetectPlayer~~~~~~~~~~~~~~~~~~~
     [Header("Detect Player System")]
     [SerializeField] private LayerMask whatIsPlayer;
     [SerializeField] private float detectRadius;
     [SerializeField] private float detectDistance;
     [SerializeField] private Vector3 detectOffset;
+    //~~~~~~~~~~~~~~~~~Patrolling~~~~~~~~~~~~~~~~~~~~~~
+    [Header("Patrolling")]
 
-    private PlayerBehave _player;
+
+    protected PlayerBehave _player;
     public void Initialize()
     {
+        gameObject.tag = "Enemy";
         _player = GameManager.instance.player.GetComponent<PlayerBehave>();
         rb = GetComponent<Rigidbody2D>();
         StartCoroutine(Patrolling());
     }
 
+#if UNITY_EDITOR
     private void OnValidate()
     {
-        gameObject.tag = "Enemy";
-
+        
+        
     }
+#endif
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -65,5 +71,6 @@ public class Enemy : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position + detectOffset, detectRadius);
+
     }
 }

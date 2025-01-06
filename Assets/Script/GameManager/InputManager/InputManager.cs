@@ -46,6 +46,17 @@ public class InputManager : MonoBehaviour
         Jumping();
         Slashing();
     }
+
+    public void ResetAction()
+    {
+        isJumping = false;
+        pause = false;
+        move = 0f;
+        look = 0f;
+        isSlashing = false;
+        slash = false;
+    }
+
     private void Pause()
     {
         pause = data.actions["pause"].WasPressedThisFrame();

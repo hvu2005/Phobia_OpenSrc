@@ -111,7 +111,10 @@ public class MenuManager : MonoBehaviour
         menuStack.Pop().SetActive(false);
         menuStack.Peek().SetActive(true);
 
-        EventSystem.current.SetSelectedGameObject(_firstSelectedOptions[menuStack.Peek()]);
+        if (_firstSelectedOptions.ContainsKey(menuStack.Peek()))
+        {
+            EventSystem.current.SetSelectedGameObject(_firstSelectedOptions[menuStack.Peek()]);
+        }
     }
 
     public void OnResume()

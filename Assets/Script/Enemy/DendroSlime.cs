@@ -8,11 +8,16 @@ public class DendroSlime : Enemy
     void Start()
     {
         base.Initialize();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(DetectedPlayer())
+        {
+            Vector2 targetPosition = new Vector2(_player.transform.position.x, transform.position.y);
+            transform.position = Vector2.MoveTowards(transform.position, targetPosition, Time.deltaTime * 2f);
+        }
     }
 }

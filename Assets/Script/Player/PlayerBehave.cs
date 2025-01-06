@@ -93,7 +93,7 @@ public class PlayerBehave : MonoBehaviour
     }
     private void Jumping()
     {
-        if(isGrounded)
+        if(InputManager.instance.canGetAction && isGrounded)
         {
             _jumpTimeCounter = jumpTime;
             _canJump = true;
@@ -117,7 +117,6 @@ public class PlayerBehave : MonoBehaviour
     }
     private void TakeDmg()
     {
-        _canJump = false;
 
         GameManager.instance.TakeDmgScreen();
         StartCoroutine(ImmortalCoroutine());
@@ -128,7 +127,9 @@ public class PlayerBehave : MonoBehaviour
     }
     private IEnumerator KnockBackCoroutine()
     {
+        _canJump = false;
         InputManager.instance.canGetAction = false;
+        InputManager.instance.ResetAction();
         float orginGravity = rb.gravityScale;
         rb.gravityScale = 0f;
         rb.velocity = Vector2.zero; 
